@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 header('Content-Type: application/json; charset=utf-8');
 
-const MYSQL_HOST = '127.0.0.1';
-const MYSQL_PORT = '3306';
-const MYSQL_DB = 'sem4_lab';
-const MYSQL_USER = 'root';
-const MYSQL_PASSWORD = '';
+const MYSQL_HOST = getenv('MYSQL_HOST') ?: '127.0.0.1';
+const MYSQL_PORT = getenv('MYSQL_PORT') ?: '3306';
+const MYSQL_DB = getenv('MYSQL_DB') ?: 'sem4_lab';
+const MYSQL_USER = getenv('MYSQL_USER') ?: 'root';
+const MYSQL_PASSWORD = getenv('MYSQL_PASSWORD') ?: '';
 
-const MONGO_URI = 'mongodb://127.0.0.1:27017';
-const MONGO_DB = 'sem4_lab';
-const MONGO_COLLECTION = 'profiles';
+const MONGO_URI = getenv('MONGO_URI') ?: 'mongodb://127.0.0.1:27017';
+const MONGO_DB = getenv('MONGO_DB') ?: 'sem4_lab';
+const MONGO_COLLECTION = getenv('MONGO_COLLECTION') ?: 'profiles';
 
-const REDIS_HOST = '127.0.0.1';
-const REDIS_PORT = 6379;
+const REDIS_HOST = getenv('REDIS_HOST') ?: '127.0.0.1';
+const REDIS_PORT = (int) (getenv('REDIS_PORT') ?: 6379);
 const REDIS_TTL = 86400;
 
 function json_response(bool $success, string $message, array $data = []): void

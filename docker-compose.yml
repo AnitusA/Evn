@@ -1,0 +1,59 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: sem4lab-app
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_DB: sem4_lab
+      MYSQL_USER: root
+      MYSQL_PASSWORD: rootpass
+      MONGO_URI: mongodb://mongo:27017
+      MONGO_DB: sem4_lab
+      MONGO_COLLECTION: profiles
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    depends_on:
+      - mysql
+      - mongo
+      - redis
+
+  mysql:
+    image: mysql:8.0
+    container_name: sem4lab-mysql
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: sem4_lab
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+  mongo:
+    image: mongo:7
+    container_name: sem4lab-mongo
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  redis:
+    image: redis:7-alpine
+    container_name: sem4lab-redis
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  mysql_data:
+  mongo_data:
+  redis_data:

@@ -12,7 +12,25 @@ Registration -> Login -> Profile workflow built with separate HTML, CSS, JS, and
 - MongoDB for profile details
 - Redis for session storage
 
-## Required setup
+## Run locally (Docker)
+
+1. Start all services:
+
+   ```bash
+   docker compose up --build -d
+   ```
+
+2. Open the app:
+
+   - http://localhost:8080
+
+3. Stop services:
+
+   ```bash
+   docker compose down
+   ```
+
+## Required setup (without Docker)
 
 1. Create a MySQL database named `sem4_lab`.
 2. Create a `users` table with columns:
