@@ -31,7 +31,7 @@ Registration -> Login -> Profile workflow built with separate HTML, CSS, JS, and
    ```
 
 ## Required setup (without Docker)
-
+---
 1. Create a MySQL database named `sem4_lab`.
 2. Create a `users` table with columns:
    - `id` INT AUTO_INCREMENT PRIMARY KEY
